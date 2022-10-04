@@ -8,5 +8,5 @@
 ## Theme
 1. https://www.pinterest.com/pin/702913454356292031/
 ## Thành quả 
-1. Link git :
-2. Link sản phẩm :
+1. Link git : https://github.com/Sen20312123/ManageMember1-app.git
+2. Link sản phẩm :https://sen20312123.github.io/ManageMember1-app/
