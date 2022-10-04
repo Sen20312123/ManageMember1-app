@@ -1,0 +1,146 @@
+class Member {
+    constructor(id, avatar, name, mobile, email, status) {
+        this.id = id;
+        this.avatar = avatar;
+        this.name = name;
+        this.mobile = mobile;
+        this.email = email;
+        this.status = status;
+    }
+}
+const manage_key = "data-member";
+var members = [];
+
+function init() {
+    if (localStorage.getItem(manage_key) == null) {
+        members = [
+            new Member(1, "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/3.jpg", "jenny", '0387753200', 'jenny2031213@gmail.com', 'Active'),
+            new Member(2, "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/30.jpg", "jerry", '0387753200', 'jerry2031213@gmail.com', 'Inactive'),
+            new Member(3, "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/301.jpg", "rio", '0387753200', 'rio2031213@gmail.com', 'Active')
+        ];
+        localStorage.setItem(manage_key, JSON.stringify(members));
+    }
+    else {
+        members = JSON.parse(localStorage.getItem(manage_key));
+    }
+}
+
+function renderMember() {
+    let htmls = members.map(function (member) {
+        return `
+            <tr>
+                <td class="text-center">
+                    <img class ="avatar-sm" src="${member.avatar}" alt="">
+                </td>
+                <td class="text-center">${member.name}</td>
+                <td class="text-center">${member.mobile}</td>
+                <td class="text-center">${member.email}</td>
+                <td class="text-center">${member.status}</td>
+                <td class="text-center">
+                    <i class="fa-regular fa-pen-to-square" onclick = "getMember(${member.id})"></i>
+                    <i class="fa-solid fa-trash" onclick = "removeMember(${member.id})"></i>
+                </td>
+            </tr>
+        `
+    });
+    document.getElementById('tbManage').innerHTML = htmls.join("");
+}
+function openBuild() {
+    document.querySelector('.build-container').classList.add('show');
+}
+function closeBuild() {
+    document.querySelector('.build-container').classList.remove('show');
+    reset();
+}
+function changeAvatar() {
+    document.querySelector('.avatar-lg').src = document.querySelector('#avatar').value || 'images/no-avatar.jpg';
+}
+function add() {
+
+    let avatar = document.querySelector('#avatar').value;
+    let name = document.querySelector('#name').value;
+    let mobile = document.querySelector('#mobile').value;
+    let email = document.querySelector('#email').value;
+    let status = document.querySelector('#status').value;
+    let id = findMaxId() + 1;
+
+    let member = new Member(id, avatar, name, mobile, email, status);
+    members.push(member);
+    localStorage.setItem(manage_key, JSON.stringify(members));
+    closeBuild();
+    renderMember();
+}
+function reset() {
+    document.querySelector('#avatar').value = "";
+    document.querySelector('#name').value = "";
+    document.querySelector('#memberId').value = "0";
+    document.querySelector('#mobile').value = "";
+    document.querySelector('#email').value = "";
+    document.querySelector('#status').value = "";
+    document.querySelector('.avatar-lg').src = "images/no-avatar.jpg"
+
+    document.querySelector('#btnUpdate').classList.add('d-none');
+    document.querySelector('#btnAdd').classList.remove('d-none');
+    document.querySelector('.build-title').innerText = "Add Member";
+}
+function findMaxId() {
+    let max = 0;
+    for (let member of members) {
+        if (member.id > max) {
+            max = member.id;
+        }
+    }
+    return max;
+}
+function removeMember(memberId) {
+    let confirm = window.confirm("Are you sure to remove this member?");
+    if (confirm) {
+        let index = members.find(function (member) {
+            return member.id == memberId;
+        })
+        members.splice(index, 1);
+        localStorage.setItem(manage_key, JSON.stringify(members));
+        renderMember();
+    }
+}
+function getMember(memberId) {
+    let index = members.find(function (member) {
+        return member.id == memberId;
+    })
+    document.querySelector('#avatar').value = index.avatar;
+    document.querySelector('#name').value = index.name;
+    document.querySelector('#memberId').value = index.id;
+    document.querySelector('#mobile').value = index.mobile;
+    document.querySelector('#email').value = index.email;
+    document.querySelector('#status').value = index.status;
+    document.querySelector('.avatar-lg').src = index.avatar;
+
+    document.querySelector('#btnUpdate').classList.remove('d-none');
+    document.querySelector('#btnAdd').classList.add('d-none');
+
+    document.querySelector('.build-title').innerText = "Update Member";
+    openBuild();
+}
+
+function update() {
+
+    let id = document.querySelector('#memberId').value;
+
+    let index = members.find(function (member) {
+        return member.id == id;
+    })
+    index.avatar = document.querySelector('#avatar').value;
+    index.name = document.querySelector('#name').value;
+    index.mobile = document.querySelector('#mobile').value;
+    index.email = document.querySelector('#email').value;
+    index.status = document.querySelector('#status').value;
+    localStorage.setItem(manage_key, JSON.stringify(members));
+    closeBuild();
+    renderMember();
+}
+
+function master() {
+    init();
+    renderMember();
+}
+master();

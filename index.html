@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ManageMember App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="ManageMember.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h2 class="heading-2" >Members</h2>
+            <button class="btn btn-manage" onclick="openBuild()">Add new</button>
+        </div>
+        <div class="row">
+            <table  class="table">
+                <thead>
+                    <tr>
+                        <th>Photo</th>
+                        <th>Member name</th>
+                        <th> Mobile</th>
+                        <th> Email </th>
+                        <th> Status</th>
+                        <th> Operation</th>
+                    </tr>
+                </thead>
+                <tbody id = "tbManage">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="build-container">
+        <div class="build">
+            <div class="build-header">
+                <div class="build-title">Add Member</div>
+                <div class="close-build" onclick="closeBuild()">&times;</div>
+            </div>
+                <div class="build-body">
+                    <div class="create-member">
+                        <div class="member-info" >
+                            <div class="form-group">
+                                <label for="avatar">photo</label>
+                                <input type="url" class="form-control" id="avatar" onchange="changeAvatar()">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name">
+                                <input type="hidden" value="0" id="memberId">
+                            </div>
+                            <div class="form-group">
+                                <label for="mobile">Mobile</label>
+                                <input type="tel" class="form-control" id="mobile">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <input type="text" class="form-control" id="status">
+                            </div>
+                            <div class="form-group">
+                                <label for=""></label>
+                                <button id="btnAdd" class="btn btn-warning mr" onclick="add()">Add</button>
+                                <button id= "btnUpdate" class="btn btn-manage mr d-none" onclick="update()">Save</button>
+                                <button class="btn btn-warning-1" onclick="closeBuild()">Canel</button>
+                        </div>
+                    </div>
+                    <div class="preview-avatar" >
+                        <img class="avatar-lg" src="images/no-avatar.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script src="ManageMember.js"></script>
+</html>
