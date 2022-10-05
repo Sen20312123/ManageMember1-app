@@ -62,10 +62,30 @@ function changeAvatar() {
 function add() {
 
     let avatar = document.querySelector('#avatar').value;
+    if (!validation(avatar)) {
+        alert(" Please add photos!")
+        return;
+    }
     let name = document.querySelector('#name').value;
+    if (!validation(name)) {
+        alert(" Please enter information!")
+        return;
+    }
     let mobile = document.querySelector('#mobile').value;
+    if (!validation(mobile)) {
+        alert(" Please enter information!")
+        return;
+    }
     let email = document.querySelector('#email').value;
+    if (!validation(email)) {
+        alert(" Please enter information!")
+        return;
+    }
     let status = document.querySelector('#status').value;
+    if (!validation(status)) {
+        alert(" Please enter information!")
+        return;
+    }
     let id = findMaxId() + 1;
 
     let member = new Member(id, avatar, name, mobile, email, status);
@@ -87,6 +107,10 @@ function reset() {
     document.querySelector('#btnAdd').classList.remove('d-none');
     document.querySelector('.build-title').innerText = "Add Member";
 }
+function validation(field) {
+    return field != null && field.trim() != '';
+}
+
 function findMaxId() {
     let max = 0;
     for (let member of members) {
