@@ -99,7 +99,7 @@ function findMaxId() {
 function removeMember(memberId) {
     let confirm = window.confirm("Are you sure to remove this member?");
     if (confirm) {
-        let index = members.find(function (member) {
+        let index = members.findIndex(function (member) {
             return member.id == memberId;
         })
         members.splice(index, 1);
