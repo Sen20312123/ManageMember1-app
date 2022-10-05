@@ -10,7 +10,7 @@ class Member {
 }
 const manage_key = "data-member";
 var members = [];
-var page_size = 3;
+var page_size = 5;
 var total_pages = 0;
 var page_number = 1;
 function init() {
@@ -148,7 +148,7 @@ function buildPagination() {
     let start = page_number == 1 ? 1 : page_number == total_pages ? page_number - 2 : page_number - 1;
     let end = page_number == total_pages ? total_pages : page_number == 1 ? page_number + 2 : page_number + 1;
     paginationString += `<button class="tbn-page " onclick='changePage(1)'>&#x25C0;</button>`;
-    for (let page = page_number; page <= total_pages; page++) {
+    for (let page = 1; page <= total_pages; page++) {
         paginationString += `
                                     <button class='tbn-page ${page == page_number ? 'active' : ''}'
                                         onclick='changePage(${page})'>
