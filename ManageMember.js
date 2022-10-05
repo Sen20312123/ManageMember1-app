@@ -10,7 +10,9 @@ class Member {
 }
 const manage_key = "data-member";
 var members = [];
-
+var page_size = 3;
+var total_pages = 0;
+var page_number = 1;
 function init() {
     if (localStorage.getItem(manage_key) == null) {
         members = [
@@ -26,7 +28,8 @@ function init() {
 }
 
 function renderMember() {
-    let htmls = members.map(function (member) {
+    let data = members.slice((page_size * (page_number - 1)), (page_size * page_number));
+    let htmls = data.map(function (member) {
         return `
             <tr>
                 <td class="text-center">
@@ -44,6 +47,7 @@ function renderMember() {
         `
     });
     document.getElementById('tbManage').innerHTML = htmls.join("");
+    buildPagination();
 }
 function openBuild() {
     document.querySelector('.build-container').classList.add('show');
@@ -138,9 +142,30 @@ function update() {
     closeBuild();
     renderMember();
 }
+function buildPagination() {
+    total_pages = Math.ceil(members.length / page_size);
+    let paginationString = "";
+    let start = page_number == 1 ? 1 : page_number == total_pages ? page_number - 2 : page_number - 1;
+    let end = page_number == total_pages ? total_pages : page_number == 1 ? page_number + 2 : page_number + 1;
+    paginationString += `<button class="tbn-page " onclick='changePage(1)'>&#x25C0;</button>`;
+    for (let page = page_number; page <= total_pages; page++) {
+        paginationString += `
+                                    <button class='tbn-page ${page == page_number ? 'active' : ''}'
+                                        onclick='changePage(${page})'>
+                                ${page}</button>`
+    }
+    paginationString += `<button class="tbn-page " onclick='changePage(${total_pages})'>&#x25B6;</button>`;
+    document.getElementById('paging-area').innerHTML = paginationString;
+}
+function changePage(page) {
+    page_number = page;
+    renderMember();
+}
 
 function master() {
     init();
     renderMember();
 }
 master();
+
+

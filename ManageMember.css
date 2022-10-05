@@ -146,3 +146,29 @@
 .d-none{
     display: none;
 }
+#pagination{
+    list-style: none;
+    display: flex;
+}
+
+.tbn-page{
+    border: none;
+    outline: none;
+    padding: 10px;
+    border: 1px solid rgba(151, 38, 151, 0.596);
+    border-radius: 3px;
+    margin-right: 2px;
+}
+
+.tbn-page:hover{
+    background-color: rgba(216, 66, 216, 0.623);
+    cursor: pointer;
+}
+.active{
+    background-color: rgba(234, 0, 255, 0.589);
+    color: white;
+}
+.paging-area{
+    display: flex; 
+    
+}
