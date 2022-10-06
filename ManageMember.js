@@ -132,7 +132,7 @@ function removeMember(memberId) {
     }
 }
 function getMember(memberId) {
-    let index = members.findIndex(function (member) {
+    let index = members.find(function (member) {
         return member.id == memberId;
     })
     document.querySelector('#avatar').value = index.avatar;
