@@ -112,10 +112,10 @@ function validation(field) {
 }
 
 function findMaxId() {
-    let max = 0;
-    for (let member of members) {
-        if (member.id > max) {
-            max = member.id;
+    let max = members[0];
+    for (let i = 1 ; i < members.lenght ; ++i) {
+        if (members[i].id > max) {
+            max = members[i].id;
         }
     }
     return max;
