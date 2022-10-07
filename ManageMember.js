@@ -62,27 +62,27 @@ function changeAvatar() {
 function add() {
 
     let avatar = document.querySelector('#avatar').value;
-    if (!validation(avatar)) {
+    if (!error(avatar)) {
         alert(" Please add photos!")
         return;
     }
     let name = document.querySelector('#name').value;
-    if (!validation(name)) {
+    if (!error(name)) {
         alert(" Please enter information!")
         return;
     }
     let mobile = document.querySelector('#mobile').value;
-    if (!validation(mobile)) {
+    if (!error(mobile)) {
         alert(" Please enter information!")
         return;
     }
     let email = document.querySelector('#email').value;
-    if (!validation(email)) {
+    if (!error(email)) {
         alert(" Please enter information!")
         return;
     }
     let status = document.querySelector('#status').value;
-    if (!validation(status)) {
+    if (!error(status)) {
         alert(" Please enter information!")
         return;
     }
@@ -107,7 +107,7 @@ function reset() {
     document.querySelector('#btnAdd').classList.remove('d-none');
     document.querySelector('.build-title').innerText = "Add Member";
 }
-function validation(field) {
+function error(field) {
     return field != null && field.trim() != '';
 }
 
