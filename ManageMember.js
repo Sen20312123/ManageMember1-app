@@ -87,7 +87,7 @@ function add() {
         return;
     }
     let id = findMaxId() + 1;
-
+    console.log(id)
     let member = new Member(id, avatar, name, mobile, email, status);
     members.push(member);
     localStorage.setItem(manage_key, JSON.stringify(members));
@@ -112,10 +112,10 @@ function validation(field) {
 }
 
 function findMaxId() {
-    let max = members[0];
-    for (let i = 1 ; i < members.lenght ; ++i) {
-        if (members[i].id > max) {
-            max = members[i].id;
+    let max = 0;
+    for (let member of members) {
+        if (member.id > max) {
+            max = member.id;
         }
     }
     return max;
