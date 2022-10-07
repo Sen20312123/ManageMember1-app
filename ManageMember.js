@@ -40,8 +40,8 @@ function renderMember() {
                 <td class="text-center">${member.email}</td>
                 <td class="text-center">${member.status}</td>
                 <td class="text-center">
-                    <i class="fa-regular fa-pen-to-square" onclick = "getMember(${member.id})"></i>
-                    <i class="fa-solid fa-trash" onclick = "removeMember(${member.id})"></i>
+                    <i class="fa-regular fa-pen-to-square" onclick = "getMember(${member.id})"id="fix"></i>
+                    <i class="fa-solid fa-trash" onclick = "removeMember(${member.id})"id="fix"></i>
                 </td>
             </tr>
         `
